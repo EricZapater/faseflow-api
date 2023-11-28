@@ -18,8 +18,10 @@ func Setup() {
 	if err != nil {
 		panic(err)
 	}
+	
 	err = db.Ping()
 	if err != nil {
 		fmt.Println(err)
 	}
+	
 }

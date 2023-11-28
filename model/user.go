@@ -33,3 +33,19 @@ func GetUser(id string)(User, error){
 	}
 	return user, nil
 }
+
+func CheckUser(username string, user *User) bool{
+	statement := `SELECT id, username, password FROM public.users WHERE username = $1 limit 1;`
+	rows, err := db.Query(statement, username)
+	if err != nil {
+		return false
+	}
+	for rows.Next(){
+		err = rows.Scan(&user.ID, &user.Username, &user.Password)
+		if err != nil {
+			return false
+		}
+	}
+	return true
+
+}
